@@ -62,10 +62,11 @@
                         <span>Save:</span>
                         <input id="savings" class="p-2 rounded bg-light border-0 ms-1" type="text"
                             placeholder="Enter Saving Amount"> %
-                        <button class="border-0 rounded px-3 py-1 bg-danger text-white fs-5 fw-normal">Save</button>
+                        <button id="savings-btn"
+                            class="border-0 rounded px-3 py-1 bg-danger text-white fs-5 fw-normal">Save</button>
                     </div>
-                    <h5>Saving Amount: <span>Display Total</span></h5>
-                    <h5>Remaining Balance: <span>Display Total</span></h5>
+                    <h5>Saving Amount: <span id="display-total-savings"></span></h5>
+                    <h5>Remaining Balance: <span id="display-total-remaining-balance"></span></h5>
 
                 </div>
             </div>
@@ -73,13 +74,9 @@
         </section>
     </main>
     <!-- Bootstrap JS Link -->
-    <script src="https://kit.fontawesome.com/21b1b5af2f.js" crossorigin="anonymous"></script>
 
-    <!-- JS Link -->
+    <!--Custom JS Link -->
     <script src="JS/world-bank.js"></script>
 </body>
 
 </html>
-
-<!-- -12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6
--12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 -->
