@@ -1,15 +1,20 @@
 // Not a number value to Number conversion function
 function convertIntoNum(givenId) {
-    const NaNvalue = document.getElementById(givenId);
+    const targetElement = document.getElementById(givenId);
+    const targetElementText = targetElement.innerText
+    const targetElementValue = targetElement.value;
+
+
     if (givenId.includes('display')) {
-        const valueInNum = parseFloat(NaNvalue.innerText);
+        const valueInNum = parseFloat(targetElementText);
         return valueInNum;
     }
 
     else {
-        const valueInNum = parseFloat(NaNvalue.value);
+        const valueInNum = parseFloat(targetElementValue);
         return valueInNum;
     }
+
 }
 
 // calculating total expense
@@ -58,6 +63,24 @@ function clearFields() {
     }
 }
 
+// Error Handling Part
+
+function errorHandling() {
+    for (const givenId of arguments) {
+        document.getElementById(givenId).addEventListener('keyup', function () {
+            const inputFieldInNum = convertIntoNum(givenId);
+            if (inputFieldInNum <= 0) {
+                alert('Please enter a positive number greater than 0');
+                clearFields(givenId);
+            }
+            else if (isNaN(inputFieldInNum) == true) {
+                alert('Please enter Number');
+                clearFields(givenId);
+            }
+        })
+    }
+}
+
 // Calculate Button Event Handler
 
 document.getElementById('calculate-btn').addEventListener('click', function () {
@@ -81,3 +104,6 @@ document.getElementById('calculate-again-btn').addEventListener('click', functio
     clearFields('income', 'food-expense', 'rent-expense', 'clothes-expense', 'savings');
     clearFields('display-total-expense', 'display-total-balance', 'display-total-savings', 'display-total-remaining-balance');
 })
+
+errorHandling('income', 'food-expense', 'rent-expense', 'clothes-expense', 'savings');
+
