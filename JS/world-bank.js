@@ -41,6 +41,22 @@ function calcSaving() {
     return savings;
 }
 
+// Clear Fields Function to calculate again
+
+function clearFields() {
+
+    const inputField = '';
+    for (const givenId of arguments) {
+
+        if (givenId.includes('display')) {
+            document.getElementById(givenId).innerText = inputField;
+        }
+
+        else {
+            document.getElementById(givenId).value = inputField;
+        }
+    }
+}
 
 // Calculate Button Event Handler
 
@@ -57,4 +73,11 @@ document.getElementById('savings-btn').addEventListener('click', function () {
     const remainingBalance = currentBalance - savingAmount;
     document.getElementById('display-total-savings').innerText = savingAmount;
     document.getElementById('display-total-remaining-balance').innerText = remainingBalance;
+})
+
+// Calculate Again Button Event Handler
+
+document.getElementById('calculate-again-btn').addEventListener('click', function () {
+    clearFields('income', 'food-expense', 'rent-expense', 'clothes-expense', 'savings');
+    clearFields('display-total-expense', 'display-total-balance', 'display-total-savings', 'display-total-remaining-balance');
 })
