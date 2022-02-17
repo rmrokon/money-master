@@ -1,3 +1,20 @@
+// Clear Fields Function to calculate again
+
+function clearFields() {
+
+    const inputField = '';
+    for (const givenId of arguments) {
+
+        if (givenId.includes('display')) {
+            document.getElementById(givenId).innerText = inputField;
+        }
+
+        else {
+            document.getElementById(givenId).value = inputField;
+        }
+    }
+}
+
 // Not a number value to Number conversion function
 function convertIntoNum(givenId) {
     const targetElement = document.getElementById(givenId);
@@ -46,26 +63,9 @@ function calcSaving() {
     return savings;
 }
 
-// Clear Fields Function to calculate again
-
-function clearFields() {
-
-    const inputField = '';
-    for (const givenId of arguments) {
-
-        if (givenId.includes('display')) {
-            document.getElementById(givenId).innerText = inputField;
-        }
-
-        else {
-            document.getElementById(givenId).value = inputField;
-        }
-    }
-}
-
 // Error Handling Part
 
-function errorHandling() {
+function handlingError() {
     for (const givenId of arguments) {
         document.getElementById(givenId).addEventListener('keyup', function () {
             const inputFieldInNum = convertIntoNum(givenId);
@@ -85,8 +85,14 @@ function errorHandling() {
 
 document.getElementById('calculate-btn').addEventListener('click', function () {
     const balance = calcBalance();
-    // Displaying total balance
-    document.getElementById('display-total-balance').innerText = balance;
+    if (balance < 0) {
+        alert('Your expense is higher than your income! Visit our office if you need a loan!')
+        clearFields('display-total-expense');
+    }
+    else {
+        // Displaying total balance
+        document.getElementById('display-total-balance').innerText = balance;
+    }
 })
 
 // Saving Button Event Handler
@@ -94,8 +100,15 @@ document.getElementById('savings-btn').addEventListener('click', function () {
     const savingAmount = calcSaving();
     const currentBalance = calcBalance();
     const remainingBalance = currentBalance - savingAmount;
-    document.getElementById('display-total-savings').innerText = savingAmount;
-    document.getElementById('display-total-remaining-balance').innerText = remainingBalance;
+    if (remainingBalance < 0) {
+        alert('You have insufficient fund to save!');
+        clearFields('display-total-expense');
+    }
+    else {
+        document.getElementById('display-total-savings').innerText = savingAmount;
+        document.getElementById('display-total-remaining-balance').innerText = remainingBalance;
+    }
+
 })
 
 // Calculate Again Button Event Handler
@@ -105,5 +118,5 @@ document.getElementById('calculate-again-btn').addEventListener('click', functio
     clearFields('display-total-expense', 'display-total-balance', 'display-total-savings', 'display-total-remaining-balance');
 })
 
-errorHandling('income', 'food-expense', 'rent-expense', 'clothes-expense', 'savings');
+handlingError('income', 'food-expense', 'rent-expense', 'clothes-expense', 'savings');
 
