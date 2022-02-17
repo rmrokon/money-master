@@ -1,7 +1,4 @@
-.container {
-    margin-top: 38px;
-}
-
-.container input {
-    width: 229px;
+html body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
